@@ -1,10 +1,10 @@
-# XgenMySQL
-Plugin MySQL para Xgen Framework
+# XgenSQLServer
+Plugin SQLServer para Xgen Framework
 
 ![image](Resources/icono.png)
 
 
-# Funciones públicas de la clase XgenSQL2008
+# Funciones públicas de la clase XgenSQLServer
 
 ## ConvertType(string type)
 
@@ -397,15 +397,16 @@ var index_keys = "IdClient";
 string paramInputSP = GetParametersCallPKSp(index_keys);
 ```
 
-## GetRaisError(string SqlServer, int errorCode, string model, string sp)
+## GetRaisError(string SQLVersion, int Severity, int State, string model, string spName)
 Genera un mensaje de error personalizado para procedimientos almacenados en SQL Server.
 
 > ### Parámetros:
 >
->   - SqlServer: Nombre del servidor SQL.
->   - errorCode: Código de error.
+>   - SQLVersion: Nombre del servidor SQL.
+>   - Severity: Código de error.
+>   - State: Estado del error.
 >   - model: Modelo afectado.
->   - sp: Procedimiento almacenado.
+>   - spName: Nombre del procedimiento almacenado.
 >
 
 > ### Retorna: 
@@ -413,7 +414,7 @@ Genera un mensaje de error personalizado para procedimientos almacenados en SQL 
 
 ### Uso:
 ```CSharp
-var sRaiceError = GetRaisError("SQLServer", 500, "Client", "ClientsSelProc");
+var sRaiceError = GetRaisError("MySQL", 500, "Client", "ClientsSelProc");
 ```
 
 
@@ -683,7 +684,7 @@ Tipo: Dictionary<string, string>
 Acceso: Público
 ````
 ### SQLType (string)
-Indica el motor de base de datos (ej: SQLServer2008, MySQL).
+Indica el motor de base de datos (ej: SQLServer, MySQL, Sybase, etc).
 ````
 Tipo: string
 Acceso: Público
@@ -836,7 +837,7 @@ Tipo: List<Table>
 ### SQLType
 Indica el tipo de base de datos SQL manejada por el Plugin.
 ````
-Valor fijo: "SQLServer2008"
+Valor fijo: "SQLServer"
 Tipo: string
 ````
 ### DatabaseNameDefault
