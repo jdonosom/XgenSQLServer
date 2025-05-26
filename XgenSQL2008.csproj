@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<SignAssembly>False</SignAssembly>
+		<Version>$(VersionPrefix)</Version>
+		<Description>SQL Server 2008</Description>
+		<Copyright>José Patricio Donoso Moscoso</Copyright>
+		<PackageIcon></PackageIcon>
+		<AssemblyOriginatorKeyFile>G:\Users\pepel\Desktop\codigo\Xgen\SauroGenerador\KeyPair.snk</AssemblyOriginatorKeyFile>
+		<AssemblyVersion>1.0.1.1</AssemblyVersion>
+		<FileVersion>1.0.1.1</FileVersion>
+		<Title>Sql Server 2008</Title>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<IsPublishable>True</IsPublishable>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<IsPublishable>True</IsPublishable>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Compile Remove="Connect\DatabaseException.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Remove="icono.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.4" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\icono.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\XauroCommon\XauroCommon.csproj" />
+	</ItemGroup>
+
+</Project>
