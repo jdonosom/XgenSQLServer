@@ -392,10 +392,10 @@ Genera una lista de parámetros para llamar a un procedimiento almacenado basado
 >   - string - Los parámetros para llamar a un procedimiento almacenado.
 
 ### Uso:
-````
+```CSharp
 var index_keys = "IdClient";
 string paramInputSP = GetParametersCallPKSp(index_keys);
-````
+```
 
 ## GetRaisError(string SqlServer, int errorCode, string model, string sp)
 Genera un mensaje de error personalizado para procedimientos almacenados en SQL Server.
@@ -412,9 +412,13 @@ Genera un mensaje de error personalizado para procedimientos almacenados en SQL 
 >   - string - El manejo de errores en SQL Server.
 
 ### Uso:
+```CSharp
+var sRaiceError = GetRaisError("SQLServer", 500, "Client", "ClientsSelProc");
+```
+
 
 ## GetSpDataType(Entity2 entitie)
-Obtiene el tipo de dato SQL Server de una entidad, incluyendo longitud, precisión y escala si aplica.
+Obtiene el tipo de dato SQL Server de una entidad (campo), incluyendo longitud, precisión y escala si aplica.
 > ### Parámetros:
 >
 >   - entitie: Objeto Entity2.
@@ -424,6 +428,21 @@ Obtiene el tipo de dato SQL Server de una entidad, incluyendo longitud, precisi�
 >   - string - El tipo de dato en SQL Server.
 
 ### Uso:
+```CSharp
+Entity2 entity = new Entity2
+{
+    Field = "IdClient",
+    Type = "INT",
+    MaxLength = null,
+    Precision = null,
+    Scale = null,
+    IsNullable = false,
+    IsIdentity = true,
+    PrimaryKey = true,
+    ParamPrg = "@IdClient"
+};
+string dataType = GetSpDataType(entity);
+```
 
 ## GetTableScript(string tableName)
 Genera el script SQL para crear una tabla específica, incluyendo columnas y claves primarias.
@@ -436,6 +455,10 @@ Genera el script SQL para crear una tabla específica, incluyendo columnas y cla
 >   - string - El script SQL para crear una tabla.
 
 ### Uso:
+```CSharp
+string tableName = "Clients";
+string script = GetTableScript(tableName);
+```
  
 ## GetTableStructure(string tableName)
 Obtiene la estructura de una tabla, incluyendo nombre de columna, tipo, nulabilidad y si es clave primaria.
@@ -447,6 +470,10 @@ Obtiene la estructura de una tabla, incluyendo nombre de columna, tipo, nulabili
 >   - List<(string Nombre, string Tipo, bool EsNulo, bool EsClavePrimaria)> - La estructura de una tabla.
 
 ### Uso:
+```CSharp
+string tableName = "Clients";
+List<(string Nombre, string Tipo, bool EsNulo, bool EsClavePrimaria)> structure = GetTableStructure(tableName);
+```
 
 ## HeaderSpMethod(string spName)
 Genera un encabezado para un procedimiento almacenado, incluyendo instrucciones para eliminarlo si ya existe.
@@ -459,16 +486,28 @@ Genera un encabezado para un procedimiento almacenado, incluyendo instrucciones 
 >   - string - El encabezado de un procedimiento almacenado.
 
 ### Uso:
+```CSharp
+var spName = "ClientsSelProc";
+string header = HeaderSpMethod(spName);
+```
 
 ## Inicialize()
 Inicializa la configuración del plugin, incluyendo la carga de colores y otros parámetros desde un archivo de configuración.
 > ### Parámetros: Ninguno.
 >
 
+### Retorna: void.
+
+### Uso:
+```CSharp
+Inicialize();
+```
+
+
 > ### Retorna: void.
 	
 ## LoadTables(string tables)
-Carga la estructura de una lista de tablas, incluyendo columnas, tipos de datos y claves primarias.
+Carga la estructura de una lista de tablas en la Propiedad Tablas, incluyendo columnas, tipos de datos y claves primarias.
 > ### Parámetros:
 >
 >   - tables: Lista de nombres de tablas.
@@ -477,6 +516,9 @@ Carga la estructura de una lista de tablas, incluyendo columnas, tipos de datos 
 > ### Retorna: void.
 
 ### Uso:
+```CSharp
+LoadTables("Clients, Orders, Products");
+```
 	
 ## ProcDelProc(Table tabla)
 Genera el script SQL para un procedimiento almacenado que elimina registros de una tabla específica.
@@ -489,6 +531,10 @@ Genera el script SQL para un procedimiento almacenado que elimina registros de u
 >   - string - El script SQL para eliminar datos en una tabla.
 
 ### Uso:
+```CSharp
+var tabla = "Clients";
+string sProcDelProc = ProcDelProc(tabla);
+```
 
 ## ProcSelProc(Table tabla)
 Genera el script SQL para un procedimiento almacenado que selecciona registros de una tabla específica.
@@ -501,6 +547,10 @@ Genera el script SQL para un procedimiento almacenado que selecciona registros d
 >   - string - El script SQL para seleccionar datos en una tabla.
 
 ### Uso:
+```CSharp
+var tabla = "Clients";
+string sProcSelProc = ProcSelProc(tabla);
+```
 
 ## ProcUpdProc(Table tabla)
 Genera el script SQL para un procedimiento almacenado que actualiza registros de una tabla específica.
@@ -513,6 +563,10 @@ Genera el script SQL para un procedimiento almacenado que actualiza registros de
 >   - string - El script SQL para actualizar datos en una tabla.
 
 ### Uso:
+```CSharp
+var tabla = "Clients";
+string sProcUpdProc = ProcUpdProc(tabla);
+```
 
 ## SetDefaultValue(string type)
 Devuelve el valor por defecto para un tipo de dato específico.
@@ -525,6 +579,9 @@ Devuelve el valor por defecto para un tipo de dato específico.
 >   string - El valor por defecto para un tipo de dato.
 
 ### Uso:
+```CSharp
+string defaultValue = SetDefaultValue("VARCHAR");
+```
 
 ## SetParamCallProcDeletePKSp(string index_keys)
 Genera una lista de parámetros para llamar a un procedimiento almacenado de eliminación basado en las claves primarias.
@@ -536,6 +593,11 @@ Retorna: string - Los parámetros para llamar a un procedimiento almacenado.
 
 ### Uso:
 
+```CSharp
+var index_keys = "IdClient";
+string paramCallDelete = SetParamCallProcDeletePKSp(index_keys);
+```
+
 ## SetParamProcIn(List<FieldList> fields)
 Genera una lista de parámetros de entrada para un procedimiento almacenado basado en una lista de campos.
 > ### Parámetros:
@@ -546,6 +608,10 @@ Genera una lista de parámetros de entrada para un procedimiento almacenado basa
 >   - string - Los parámetros de entrada para un procedimiento almacenado.
 
 ### Uso:
+```CSharp
+List<FieldList> fields = GetFields("Clients");
+string paramInput = SetParamProcIn(fields);
+```
  
 # Funciones privadas en la clase XgenSQL2008
 
@@ -562,6 +628,16 @@ Genera un bloque de manejo de errores para procedimientos almacenados en SQL Ser
 > ### Retorna:
 >   - string - Código SQL para manejar errores en procedimientos almacenados.
 	
+### Uso:
+```CSharp
+string errorMessage = "Error al ejecutar el procedimiento almacenado.";
+string sqlState = "42000";
+int errorCode = 500;
+string spName = "ClientsSelProc";
+string errorHandler = HandlerError(errorMessage, sqlState, errorCode, spName);
+```
+
+
 ## GetColumnsDefinition(string tableName)
 Obtiene las definiciones de las columnas de una tabla, incluyendo tipo de dato, longitud y nulabilidad.
 > ### Parámetros:
@@ -570,7 +646,12 @@ Obtiene las definiciones de las columnas de una tabla, incluyendo tipo de dato, 
 >
 > ### Retorna:
 >   - List<string> - Lista de definiciones de columnas de una tabla.
-	
+
+### Uso:
+```CSharp
+List<string> columns = GetColumnsDefinition("Clients");
+```
+
 ## GetPrimaryKeyDefinition(string tableName)
 Obtiene la definición de la clave primaria de una tabla específica.
 > ### Parámetros:
@@ -580,7 +661,13 @@ Obtiene la definición de la clave primaria de una tabla específica.
 
 > ### Retorna:
 >   - string - Definición de la clave primaria de una tabla.
- 
+
+### Uso:
+```CSharp
+var tableName = "Clients";
+string primaryKey = GetPrimaryKeyDefinition(tableName);
+```
+    
 # Propiedades
 ### Database (IDatabase)
 Instancia para gestionar conexiones y operaciones con la base de datos.
